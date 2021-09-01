@@ -1,0 +1,107 @@
+{
+	"year": "2021",
+	"month": 8,
+	"bank": "CIMB",
+	"issuer_transaction": {
+		"A": {
+			"contactless_volume": 0,
+			"contacless_value": 0,
+			"contact_volume": 0,
+			"contact_value": 0,
+			"sales_volume": 0,
+			"sales_value": 36634343
+		}
+	},
+	"acquirer_transaction": {
+		"A": {
+			"contactless_volume": 0,
+			"contacless_value": 0,
+			"contact_volume": 0,
+			"contact_value": 0,
+			"sales_volume": 0,
+			"sales_value": 36634343
+		}
+	},
+	"denial_transaction": {
+		"A": {
+			"total_number_denial": 0,
+			"contacless_value": 0,
+			"contact_volume": 0,
+			"contact_value": 0,
+			"sales_volume": 0,
+			"sales_value": 36634343
+		}
+	},
+	"denial_codes": {
+		"A": {
+			"5": 23,
+			"54": 0,
+			"75": 23,
+			"12": 0,
+			"57": 23,
+			"41": 0,
+			"14": 0,
+			"62": 0,
+			"83": 23,
+			"85": 123,
+			"64": 0,
+			"T2": 0,
+			"30": 0,
+			"71": 0,
+			"89": 0,
+			"90/91": 0,
+			"51": 0,
+			"9": 0,
+			"65": 0,
+			"61": 0,
+			"06/9": 0,
+			"101": 0,
+			"105": 0,
+			"68": 0,
+			"0": 0,
+			"24": 0,
+			"25": 0,
+			"46": 0,
+			"50": 0,
+			"55": 0,
+			"205": 0,
+			"56": 0,
+			"Q1": 0,
+			"38": 0,
+			"36": 0,
+			"43": 0,
+			"909": 0
+
+		}
+	},
+	"system_availability": {
+		"total_maintenance": 4,
+		"datetime": [
+			[
+				"19/8/2021",
+				"12:00 AM",
+				"1:33 AM",
+				"System Error"
+			],
+			[
+				"19/10/2021",
+				"3:00 AM",
+				"3:53 AM",
+				"System Error"
+			],
+			[
+				"20/9/2021",
+				"1:00 AM",
+				"1:33 AM",
+				"System Error"
+			]
+		],
+		"service_downtime": {
+			"uptime": 99.98
+		},
+		"issuer_dispute": {
+			"within_sla": 16,
+			"beyond_sla": 1
+		}
+	}
+}
