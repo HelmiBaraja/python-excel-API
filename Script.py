@@ -90,6 +90,19 @@ def add(JSON, Excel):
                 False
             ]
         },
+        'denial_transaction': {
+            'start': {'row': 6, 'col': 5},
+            'cmp head': [False],
+            'id start': {'row': 6, 'col': 2},
+            'id length': 3,
+            'order': [
+                "total_no_transaction",
+                False,
+                "total_denial",
+                False,
+                "total_denial_slaa"
+            ]
+        },
         'rest': [
             ['title', 'Summary', 'C4'],
             ['title', 'issuer_transaction', 'F4'],
@@ -113,9 +126,20 @@ def add(JSON, Excel):
                     'cmp head': [False],
                     'id start': {'row': 5, 'col': 2},
                     'id length': 2,
+                    'json key': 'issuer_dispute',
                     'order': [
                         'within_sla',
                         'beyond_sla'
+                        ]
+                },
+                'Service availability': {
+                    'start': {'row': 6, 'col': 5},
+                    'cmp head': [False],
+                    'id start': {'row': 6, 'col': 2},
+                    'id length': 3,
+                    'json key': 'service_availability',
+                    'order': [
+                        'uptime'
                         ]
                 }
             }
@@ -149,12 +173,14 @@ def add(JSON, Excel):
         for i in range(start, finish):
             yield get_column_letter(i) + str(row)
 
-    def linear_search(sheetname, key, guide):
+    def linear_search(sheetname, key, guide, json_key=None):
         WS = WB[sheetname]
         max_row = WS.max_row
+        print(sheetname,max_row)
         for row in range(guide['start']['row'], max_row):
             address = get_column_letter(guide['start']['col'] - 1) + str(row)
-            if WS[address].value in JSON[key] or WS[address].value == JSON['month']:
+            print(sheetname, WS[address].value, json_key, None if not json_key else WS[address].value in JSON[key][json_key].keys())
+            if WS[address].value in JSON[key] or (json_key and WS[address].value in JSON[key][json_key]) or WS[address].value == JSON['month']:
                 the_cell = True
                 i = 0
                 for col in WS.iter_cols(min_col=guide['id start']['col'],
@@ -168,8 +194,10 @@ def add(JSON, Excel):
                     i = 0
                     for cell in iter_tool(guide['start']['col'],
                                           guide['start']['col'] + len(guide['order']), row):
-                        WS[cell].fill = PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
-                        WS[cell].value = guide['order'][i] #for testing purpose, should be JSON[key][guide['order'][i]]
+                        if guide['order'][i]:
+                            WS[cell].fill = PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
+                            print(cell, WS[cell].value)
+                            WS[cell].value = guide['order'][i] #for testing purpose, should be JSON[key][guide['order'][i]]
                         i += 1
                 elif the_cell:
                     header = iter_tool(guide['start']['col'],
@@ -204,12 +232,20 @@ def add(JSON, Excel):
         #special case - for system availability
         elif key == "system_availability":
             for sheet in loc_dict["system_availability"]:
-                linear_search(sheet, key, loc_dict[key][sheet])
+
+                linear_search(sheet, key, loc_dict[key][sheet], None if 'json key' not in loc_dict[key][sheet] else loc_dict[key][sheet]['json key'])
                 #special case - filling the service maintenance detail
                 if sheet == 'Service Maintenance':
                     WS = WB[sheet]
                     start = loc_dict[key][sheet]['maintenance details']['start']['row']
                     collumn = loc_dict[key][sheet]['maintenance details']['start']['col']
+                    for row in range(start,WS.max_row):
+                        for col in iter_tool(collumn,collumn+5,row):
+                            WS[col].value = None
+                            WS[col].border = Border(top = Side(border_style='thin', color='00FFFFFF'),
+                                          right = Side(border_style='thin', color='00FFFFFF'),
+                                          bottom = Side(border_style='thin', color='00FFFFFF'),
+                                          left = Side(border_style='thin', color='00FFFFFF'))
                     for data in JSON[key]['datetime']:
                         #setting time from inside data to be comparable
                         the_date = date(*list(map(int, data[0].split('/')))[::-1])
@@ -272,5 +308,5 @@ def add(JSON, Excel):
             WS[coor].value = WS[coor].value.replace('ABC', JSON['bank'])
     WB.save(filename=f'{datetime.now().strftime("%m-%d-%Y_%H-%M-%S")}_{JSON[identifier[2]]}.xlsx')
 
-
-add(open('req.json'), 'excel.xlsx')
+if __name__ == '__main__':
+    add(open('req.json'), 'excel.xlsx')
