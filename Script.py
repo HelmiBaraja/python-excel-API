@@ -1,5 +1,6 @@
 import json
 import openpyxl as pyxl
+from tempfile import NamedTemporaryFile
 from openpyxl.utils import get_column_letter
 from openpyxl.styles import PatternFill, Alignment, Border, Side, Font
 from datetime import datetime, date
@@ -132,6 +133,17 @@ def add(JSON, Excel):
                         'beyond_sla'
                         ]
                 },
+                'Acquirer Dispute': {
+                    'start': {'row': 5, 'col': 4},
+                    'cmp head': [False],
+                    'id start': {'row': 5, 'col': 2},
+                    'id length': 2,
+                    'json key': 'issuer_dispute',
+                    'order': [
+                        'within_sla',
+                        'beyond_sla'
+                    ]
+                },
                 'Service availability': {
                     'start': {'row': 6, 'col': 5},
                     'cmp head': [False],
@@ -176,10 +188,8 @@ def add(JSON, Excel):
     def linear_search(sheetname, key, guide, json_key=None):
         WS = WB[sheetname]
         max_row = WS.max_row
-        print(sheetname,max_row)
         for row in range(guide['start']['row'], max_row):
             address = get_column_letter(guide['start']['col'] - 1) + str(row)
-            print(sheetname, WS[address].value, json_key, None if not json_key else WS[address].value in JSON[key][json_key].keys())
             if WS[address].value in JSON[key] or (json_key and WS[address].value in JSON[key][json_key]) or WS[address].value == JSON['month']:
                 the_cell = True
                 i = 0
@@ -196,7 +206,6 @@ def add(JSON, Excel):
                                           guide['start']['col'] + len(guide['order']), row):
                         if guide['order'][i]:
                             WS[cell].fill = PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
-                            print(cell, WS[cell].value)
                             WS[cell].value = guide['order'][i] #for testing purpose, should be JSON[key][guide['order'][i]]
                         i += 1
                 elif the_cell:
