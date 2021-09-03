@@ -1,6 +1,6 @@
 {
 	"year": "2021",
-	"month": 8,
+	"month": 9,
 	"bank": "CIMB",
 	"issuer_transaction": {
 		"A": {
@@ -1699,12 +1699,90 @@
 		],
 		"service_availability": {
 			"A": {
-			"uptime": 99.98
+			"uptime": 60
+			},
+			"B": {
+			"uptime": 60
+			},
+			"C": {
+			"uptime": 60
+			},
+			"D": {
+			"uptime": 60
+			},
+			"E": {
+			"uptime": 60
+			},
+			"F": {
+			"uptime": 60
+			},
+			"G": {
+			"uptime": 60
+			},
+			"H": {
+			"uptime": 60
+			},
+			"I": {
+			"uptime": 60
+			},
+			"J": {
+			"uptime": 60
+			},
+			"K": {
+			"uptime": 60
+			},
+			"L": {
+			"uptime": 60
+			},
+			"M": {
+			"uptime": 60
+			},
+			"N": {
+			"uptime": 60
+			},
+			"O": {
+			"uptime": 60
+			},
+			"P": {
+			"uptime": 60
+			},
+			"Q": {
+			"uptime": 60
+			},
+			"R": {
+			"uptime": 60
+			},
+			"S": {
+			"uptime": 60
+			},
+			"T": {
+			"uptime": 60
+			},
+			"U": {
+			"uptime": 60
+			},
+			"V": {
+			"uptime": 60
+			},
+			"W": {
+			"uptime": 60
+			},
+			"X": {
+			"uptime": 60
+			},
+			"Y": {
+			"uptime": 60
+			},
+			"Z": {
+			"uptime": 60
+			},
+			"A1": {
+			"uptime": 60
 			}
 		},
 		"issuer_dispute": {
-			"within_sla": 16,
-			"beyond_sla": 1
+			"within_sla": 32,
+			"beyond_sla": 2
 		}
 	}
 }
