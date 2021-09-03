@@ -35,6 +35,14 @@
 			"sales_volume": 123,
 			"sales_value": 123
 		},
+		"E": {
+			"contactless_volume": 123,
+			"contacless_value": 123,
+			"contact_volume": 123,
+			"contact_value": 123,
+			"sales_volume": 123,
+			"sales_value": 123
+		},
 		"F": {
 			"contactless_volume": 123,
 			"contacless_value": 123,
@@ -246,6 +254,14 @@
 			"sales_value": 123
 		},
 		"D": {
+			"contactless_volume": 123,
+			"contacless_value": 123,
+			"contact_volume": 123,
+			"contact_value": 123,
+			"sales_volume": 123,
+			"sales_value": 123
+		},
+		"E": {
 			"contactless_volume": 123,
 			"contacless_value": 123,
 			"contact_volume": 123,
@@ -1778,11 +1794,18 @@
 			},
 			"A1": {
 			"uptime": 60
+			},
+			"A2": {
+			"uptime": 60
 			}
 		},
 		"issuer_dispute": {
 			"within_sla": 32,
 			"beyond_sla": 2
+		},
+		"acquirer_dispute": {
+			"within_sla": 123,
+			"beyond_sla": 6
 		}
 	}
 }
